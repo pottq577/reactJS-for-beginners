@@ -10,11 +10,24 @@
   ></script>
   <script>
     const root = document.getElementById("root");
-    const span = React.createElement(
-      "span",
-      { id: "sesy-span", style: { color: "red" } },
+    const h3 = React.createElement(
+      "h3",
+      {
+        onMouseEnter: () => console.log("mouse enter"),
+      },
       "Hello I am a span"
     );
-    ReactDOM.render(span, root);
+    const btn = React.createElement(
+      "button",
+      {
+        onClick: () => console.log("i am clicked"),
+        style: {
+          backgroundColor: "tomato",
+        },
+      },
+      "Click me"
+    );
+    const container = React.createElement("div", null, [h3, btn]);
+    ReactDOM.render(container, root);
   </script>
 </html>
