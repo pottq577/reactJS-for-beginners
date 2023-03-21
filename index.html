@@ -11,48 +11,22 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const root = document.getElementById("root");
-    function Title() {
-      return (
-        <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
-          Hello I'm a title
-        </h3>
-      );
+    let counter = 0;
+
+    function countUp() {
+      counter++;
+      render();
     }
-    /* const h3 = React.createElement(
-      "h3",
-      {
-        onMouseEnter: () => console.log("mouse enter"),
-      },
-      "Hello I am a span"
-    ); */
-    /* Title 함수와 같은 기능을 하는 애로우 함수. 일반 함수형식으론 return문 필요 */
-    const Button = () => (
-      <button
-        style={{ backgroundColor: "tomato" }}
-        onClick={() => console.log("I'm clicked")}
-      >
-        Click Me
-      </button>
-    );
-    /* const btn = React.createElement(
-      "button",
-      {
-        onClick: () => console.log("i am clicked"),
-        style: {
-          backgroundColor: "tomato",
-        },
-      },
-      "Click me"
-    ); */
-    /* const container = React.createElement("div", null, [Title, Button]); */
+    function render() {
+      ReactDOM.render(<Container />, root);
+    }
     const Container = () => (
-      /* 컴포넌트의 첫 글자는 반드시 대문자여야 함. 소문자라면 React와 JSX는 HTML 요소로 생각할 것 */
       <div>
-        <Title />
-        <Button />
+        <h3>Total clicks: {counter}</h3>
+        <button onClick={countUp}>Click Me</button>
       </div>
     );
-
     ReactDOM.render(<Container />, root);
+    render();
   </script>
 </html>
