@@ -11,11 +11,13 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const root = document.getElementById("root");
-    const Title = (
-      <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
-        Hello I'm a title
-      </h3>
-    );
+    function Title() {
+      return (
+        <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+          Hello I'm a title
+        </h3>
+      );
+    }
     /* const h3 = React.createElement(
       "h3",
       {
@@ -23,7 +25,8 @@
       },
       "Hello I am a span"
     ); */
-    const Button = (
+    /* Title 함수와 같은 기능을 하는 애로우 함수. 일반 함수형식으론 return문 필요 */
+    const Button = () => (
       <button
         style={{ backgroundColor: "tomato" }}
         onClick={() => console.log("I'm clicked")}
@@ -41,7 +44,15 @@
       },
       "Click me"
     ); */
-    const container = React.createElement("div", null, [Title, Button]);
-    ReactDOM.render(container, root);
+    /* const container = React.createElement("div", null, [Title, Button]); */
+    const Container = () => (
+      /* 컴포넌트의 첫 글자는 반드시 대문자여야 함. 소문자라면 React와 JSX는 HTML 요소로 생각할 것 */
+      <div>
+        <Title />
+        <Button />
+      </div>
+    );
+
+    ReactDOM.render(<Container />, root);
   </script>
 </html>
