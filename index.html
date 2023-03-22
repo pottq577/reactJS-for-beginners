@@ -10,30 +10,37 @@
   ></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    // 컴포넌트는 단지 어떤 JSX를 반환하는 함수이다.
-    // props(properties)는 컴포넌트의 유일한 인자, props는 오브젝트
-    // 오브젝트인걸 알기 때문에 {} 내부의 인자를 사용해 단축 가능
-    function Btn({ banana, big }) {
+    // 절대 자동으로 return문에 들어가지 않음!! 직접 지정해줘야 함
+    function Btn({ text, changeValue }) {
+      console.log(text, "was renderd");
       return (
         <button
+          onClick={changeValue}
           style={{
             backgroundColor: "tomato",
             color: "white",
             padding: "10px 20px",
             border: 0,
             borderRadius: 10,
-            fontSize: big ? 18 : 16,
           }}
         >
-          {banana}
+          {text}
         </button>
       );
     }
+    // props의 변경이 없으면 컴포넌트를 리렌더링할지 지정 가능
+    // 위 버튼은 리렌더링, 밑 버튼은 그대로
+    const MemorizedBtn = React.memo(Btn);
     function App() {
+      // 부모 컴포넌트는 state(상태=value) 변경이 일어나고, 상태가 변경될 떄 return문이 새로 적용됨
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => setValue("Revert Changes");
       return (
+        // props에 function도 보낼 수 있음
+        // changeValue는 이벤트리스너를 달아주는 건 절대 아님! 단지 argument이자 props의 이름일 뿐
         <div>
-          <Btn banana="Save Changes" big={true} />
-          <Btn banana="Continue" big={false} />
+          <MemorizedBtn text={value} changeValue={changeValue} />
+          <MemorizedBtn text="Continue" />
         </div>
       );
     }
