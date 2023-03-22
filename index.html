@@ -16,20 +16,33 @@
       const onChange = (event) => {
         setMinutes(event.target.value);
       };
+      const reset = () => {
+        setMinutes(0);
+      };
       return (
         <div>
           <h1>Super Converter</h1>
-          <label for="minutes">Minutes</label>
-          <input
-            value={minutes}
-            id="minutes"
-            placeholder="Minutes"
-            type="number"
-            onChange={onChange}
-          />
-          <label for="hours">Minutes</label>
-          <input id="hours" placeholder="Hours" type="number" />
-          <h4>You want to convert {minutes}</h4>
+          <div>
+            <label for="minutes">Minutes</label>
+            <input
+              value={minutes}
+              id="minutes"
+              placeholder="Minutes"
+              type="number"
+              onChange={onChange}
+            />
+          </div>
+          <div>
+            <label for="hours">hours</label>
+            <input
+              value={minutes / 60}
+              id="hours"
+              placeholder="Hours"
+              type="number"
+              disabled
+            />
+          </div>
+          <button onClick={reset}>Reset</button>
         </div>
       );
     }
